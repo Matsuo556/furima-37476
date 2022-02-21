@@ -4,16 +4,14 @@
 
 | Column             | Type    | Options                      |
 | ------------------ | ------- | ---------------------------- |
-| nickname           | string  | null: false, unique: true    |
+| nickname           | string  | null: false                  |
 | email              | string  | null: false, unique: true    |
 | encrypted_password | string  | null: false                  |
 | last_name          | string  | null: false                  |
 | first_name         | string  | null: false                  |
 | last_name_kana     | string  | null: false                  |
 | first_name_kana    | string  | null: false                  |
-| birth_year_id      | integer | null: false                  |
-| birth_month_id     | integer | null: false                  |
-| birth_day_id       | integer | null: false                  |
+| birthday           | date    | null: false                  |
 
 ### Association
 
@@ -32,8 +30,6 @@
 | prefecture_id      | integer    | null: false                    |
 | shipping_time_id   | integer    | null: false                    |
 | price              | integer    | null: false                    |
-| sales_commission   | integer    | null: false                    |
-| profit             | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
@@ -50,6 +46,7 @@
 
 ### Association
 
+- belongs_to :user
 - belongs_to :item
 - has_one :address
 
@@ -61,7 +58,7 @@
 | prefecture_id   | integer    | null: false                    |
 | city            | string     | null: false                    |
 | adress          | string     | null: false                    |
-| building        | string     | null: false                    |
+| building        | string     |                                |
 | phone_number    | string     | null: falseD                   |
 | purchase_record | references | null: false, foreign_key: true |
 
