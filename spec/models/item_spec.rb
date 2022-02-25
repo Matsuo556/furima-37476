@@ -55,7 +55,7 @@ RSpec.describe Item, type: :model do
       it 'userが紐づいていないと保存できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
       it 'category_idが---では保存できない' do
         @item.category_id = 1
@@ -85,17 +85,17 @@ RSpec.describe Item, type: :model do
       it 'priceが300より小さいと保存できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range.")
+        expect(@item.errors.full_messages).to include('Price is out of setting range.')
       end
       it 'priceが9999999より大きいと保存できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range.")
+        expect(@item.errors.full_messages).to include('Price is out of setting range.')
       end
       it 'priceが全角数値では保存できない' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width number.")
+        expect(@item.errors.full_messages).to include('Price is invalid. Input half-width number.')
       end
       it 'imageが空では保存できない' do
         @item.image = nil
