@@ -1,6 +1,6 @@
 class PurchaseRecordAddress
   include ActiveModel::Model
-  attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :purchase_record_id
+  attr_accessor :item_id, :user_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :token
 
   with_options presence: true do
     validates :postal_code,         format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Input half-width number include hyphen(-)"}
@@ -10,6 +10,8 @@ class PurchaseRecordAddress
     validates :phone_number,         numericality: { only_integer: true, message: 'is invalid. Input half-width number.' }, length: { minimum: 10, maximum:11, message: 'does not fit in setting count.' }
     validates :item_id
     validates :user_id
+    validates :token
+
   end
 
   def save
