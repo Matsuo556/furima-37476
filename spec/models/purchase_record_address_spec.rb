@@ -52,7 +52,7 @@ RSpec.describe PurchaseRecordAddress, type: :model do
       it 'phone_numberが大文字だと保存できないこと' do
         @purchase_record_address.phone_number = '０１２３４５６７８９'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Phone number is invalid. Input half-width number.")
+        expect(@purchase_record_address.errors.full_messages).to include("Phone number is invalid. Input half-width number except hyphen(-)")
       end
       it 'phone_numberが10桁未満では保存できないこと' do
         @purchase_record_address.phone_number = '012345678'
@@ -63,6 +63,11 @@ RSpec.describe PurchaseRecordAddress, type: :model do
         @purchase_record_address.phone_number = '012345678901'
         @purchase_record_address.valid?
         expect(@purchase_record_address.errors.full_messages).to include("Phone number does not fit in setting count.")
+      end
+      it 'phone_numberにハイフンがあると保存できないこと' do
+        @purchase_record_address.phone_number = '012-456-789'
+        @purchase_record_address.valid?
+        expect(@purchase_record_address.errors.full_messages).to include("Phone number is invalid. Input half-width number except hyphen(-)")
       end
       it "tokenが空では登録できないこと" do
         @purchase_record_address.token = nil
