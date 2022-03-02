@@ -1,6 +1,6 @@
 class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!, only: :index
-  before_action :set_item, only: :index
+  before_action :set_item, only: [:index, :create]
   before_action :move_to_index, only: :index
 
   def index
@@ -9,7 +9,6 @@ class PurchaseRecordsController < ApplicationController
 
   def create
     @purchase_record_address = PurchaseRecordAddress.new(purchase_record_params)
-    @item = Item.find(params[:item_id])
     if @purchase_record_address.valid?
       pay_item
       @purchase_record_address.save
