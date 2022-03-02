@@ -1,8 +1,11 @@
 class PurchaseRecordsController < ApplicationController
-  
+  before_action :authenticate_user!, only: :index
+  before_action :set_item, only: :index
+  before_action :move_to_index, only: :index
+
+
   def index
     @purchase_record_address = PurchaseRecordAddress.new
-    @item = Item.find(params[:item_id])
     end
 
   def create
@@ -31,6 +34,16 @@ class PurchaseRecordsController < ApplicationController
       card: purchase_record_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
+    if @item.purchase_record
+      redirect_to root_path
+    end
   end
 
 end
