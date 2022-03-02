@@ -42,6 +42,8 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to root_path if @item.purchase_record
+    if @item.purchase_record || current_user == @item.user
+      redirect_to root_path 
+    end
   end
 end
